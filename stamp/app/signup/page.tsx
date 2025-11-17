@@ -13,7 +13,7 @@ export default function SignUp() {
           priority
         />
       </div>
-      <div className="justtify-center pt-90">
+      <div className="justify-center pt-10 sm:pt-20 md:pt-90 px-4">
         {/* Logo */}
         <div className="relative z-10 flex justify-center">
           <Image
@@ -22,17 +22,18 @@ export default function SignUp() {
             width={317}
             height={142}
             priority
+            className="w-full max-w-[317px] h-auto"
           />
         </div>
 
         {/* Sign Up Form Container */}
-        <div className="relative z-10 w-full max-w-md px-6">
+        <div className="relative z-10 w-full max-w-md px-4 sm:px-6">
           {/* Form Card */}
           <div className="p-6">
-            <h1 className="text-3xl font-bold text-center mb-2 text-gray-800">
+            <h1 className="text-[36px] font-bold text-center mb-2 text-black">
               Register
             </h1>
-            <p className="text-center text-gray-600 mb-4">
+            <p className="text-center text-[20px] text-black mb-4">
               Sign up to participate at each booth.
             </p>
             <form className="space-y-6 flex flex-col items-center">
@@ -40,7 +41,7 @@ export default function SignUp() {
               <div className="flex flex-col items-center">
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-gray-700 mb-2 self-start"
+                  className="block text-[18px] font-semibold text-black mb-2 self-start"
                 >
                   Name
                 </label>
@@ -48,7 +49,7 @@ export default function SignUp() {
                   type="text"
                   id="name"
                   name="name"
-                  className="w-[460px] h-11 px-4 rounded-full shadow-sm border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                  className="w-[460px] h-11 px-4 rounded-full shadow-sm text-black border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                   placeholder="Enter your name"
                   required
                 />
@@ -58,7 +59,7 @@ export default function SignUp() {
               <div className="flex flex-col items-center">
                 <label
                   htmlFor="phone"
-                  className="block text-sm font-medium text-gray-700 mb-2 self-start"
+                  className="block text-[18px] font-semibold text-black mb-2 self-start"
                 >
                   Phone
                 </label>
@@ -66,7 +67,7 @@ export default function SignUp() {
                   type="tel"
                   id="phone"
                   name="phone"
-                  className="w-[460px] h-11 px-4 rounded-full shadow-sm border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                  className="w-[460px] h-11 px-4 rounded-full shadow-sm text-black border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                   placeholder="Enter your phone"
                   required
                 />
@@ -75,7 +76,7 @@ export default function SignUp() {
               {/* Sign Up Button */}
               <button
                 type="submit"
-                className="w-[460px] h-11 bg-[#E38533] text-white rounded-full font-semibold hover:bg-[#aa6427] transition-colors shadow-lg hover:shadow-sm"
+                className="w-full max-w-[460px] h-11 bg-[#E38533] text-white rounded-full font-semibold hover:bg-[#aa6427] transition-colors shadow-lg hover:shadow-sm"
               >
                 Sign Up
               </button>
