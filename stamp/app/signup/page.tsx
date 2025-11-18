@@ -15,9 +15,9 @@ export default function SignUp() {
           unoptimized
         />
       </div>
-      <div className="justify-center pt-10 sm:pt-20 md:pt-90 px-4">
+      <div className="relative z-10 justify-center pt-10 sm:pt-20 md:pt-90 px-4">
         {/* Sign Up Form Container */}
-        <div className="relative z-10 w-full max-w-md px-4 sm:px-6">
+        <div className="w-full max-w-md px-4 sm:px-6">
           {/* Form Card */}
           <div className="p-6">
             <h1 className="text-[36px] font-bold text-center mb-2 text-black">
