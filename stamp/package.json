@@ -12,6 +12,7 @@
     "@aws-sdk/client-s3": "^3.933.0",
     "@prisma/client": "^6.19.0",
     "jose": "^6.1.2",
+    "html5-qrcode": "^2.3.8",
     "next": "16.0.3",
     "pg": "^8.16.3",
     "qrcode": "^1.5.4",

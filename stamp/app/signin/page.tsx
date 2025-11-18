@@ -1,64 +1,74 @@
+"use client";
+
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import usersData from "@/data/users.json";
 
 export default function SignUp() {
+  const router = useRouter();
+  const [phone, setPhone] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Check if user exists in mock data
+    const user = usersData.users.find(
+      (u) => u.phone === phone
+    );
+
+    if (user) {
+      // Store user data in localStorage
+      localStorage.setItem("userData", JSON.stringify({ name: user.name, phone: user.phone, role: user.role }));
+      
+      // Redirect based on role
+      if (user.role === "admin") {
+        router.push("/admin/scan");
+      } else {
+        router.push("/home");
+      }
+    } else {
+      setError("Invalid phone number. Please try again.");
+    }
+  };
+
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
       {/* Background Wave */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/backgrounds/BGwave.svg"
+          src="/backgrounds/BGwave.png"
           alt="Background Wave"
           fill
-          className="object-cover"
+          className="object-cover object-top"
           priority
+          quality={100}
+          unoptimized
         />
       </div>
-      <div className="justtify-center pt-90">
-        {/* Logo */}
-        <div className="relative z-10 flex justify-center">
-          <Image
-            src="/logos/Zenith30.svg"
-            alt="Zenith Logo"
-            width={317}
-            height={142}
-            priority
-          />
-        </div>
-
+      <div className="relative z-10 justify-center pt-10 sm:pt-20 md:pt-90 px-4">
         {/* Sign Up Form Container */}
-        <div className="relative z-10 w-full max-w-md px-6">
+        <div className="w-full max-w-md px-4 sm:px-6">
           {/* Form Card */}
           <div className="p-6">
-            <h1 className="text-3xl font-bold text-center mb-2 text-gray-800">
+            <h1 className="text-[36px] font-bold text-center mb-2 text-black">
               Sign in
             </h1>
-            <p className="text-center text-gray-600 mb-4">
+            <p className="text-center text-[20px] text-black mb-4">
               Sign in to join the fun at each booth.
             </p>
-            <form className="space-y-6 flex flex-col items-center">
-              {/* Full Name */}
-              <div className="flex flex-col items-center">
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-700 mb-2 self-start"
-                >
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  className="w-[460px] h-11 px-4 rounded-full shadow-sm border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
-                  placeholder="Enter your name"
-                  required
-                />
-              </div>
-
+            {error && (
+              <p className="text-center text-sm text-red-600 mb-4">
+                {error}
+              </p>
+            )}
+            <form className="space-y-6 flex flex-col items-center" onSubmit={handleSubmit}>
               {/* Phone */}
               <div className="flex flex-col items-center">
                 <label
                   htmlFor="phone"
-                  className="block text-sm font-medium text-gray-700 mb-2 self-start"
+                  className="block text-[18px] font-semibold text-black mb-2 self-start"
                 >
                   Phone
                 </label>
@@ -66,7 +76,9 @@ export default function SignUp() {
                   type="tel"
                   id="phone"
                   name="phone"
-                  className="w-[460px] h-11 px-4 rounded-full shadow-sm border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="w-[460px] h-11 px-4 rounded-full shadow-sm text-black border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                   placeholder="Enter your phone"
                   required
                 />
@@ -75,7 +87,7 @@ export default function SignUp() {
               {/* Sign Up Button */}
               <button
                 type="submit"
-                className="w-[460px] h-11 bg-[#E38533] text-white rounded-full font-semibold hover:bg-[#aa6427] transition-colors shadow-lg hover:shadow-sm"
+                className="w-full max-w-[460px] h-11 bg-[#E38533] text-white rounded-full font-semibold hover:bg-[#aa6427] transition-colors shadow-lg hover:shadow-sm"
               >
                 Sign In
               </button>

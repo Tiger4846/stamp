@@ -1,0 +1,40 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "JohnDoe",
+      "phone": "0987654321",
+      "role": "user"
+    },
+    {
+      "id": 2,
+      "name": "JaneSmith",
+      "phone": "0823456789",
+      "role": "user"
+    },
+    {
+      "id": 3,
+      "name": "สมชาย ใจดี",
+      "phone": "0834567890",
+      "role": "user"
+    },
+    {
+      "id": 4,
+      "name": "สมหญิง รักสนุก",
+      "phone": "0845678901",
+      "role": "user"
+    },
+    {
+      "id": 5,
+      "name": "Michael Johnson",
+      "phone": "0856789012",
+      "role": "user"
+    },
+    {
+      "id": 6,
+      "name": "Admin User",
+      "phone": "0800000000",
+      "role": "admin"
+    }
+  ]
+}
