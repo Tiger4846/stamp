@@ -169,7 +169,9 @@ export default function Home() {
   const resetAllStamps = () => {
     if (confirm("Are you sure you want to reset all stamps?")) {
       setSponsors((prev) => prev.map((s) => ({ ...s, completed: false })));
-      setSilverSponsors((prev) => prev.map((s) => ({ ...s, completed: false })));
+      setSilverSponsors((prev) =>
+        prev.map((s) => ({ ...s, completed: false }))
+      );
       localStorage.removeItem("completedStamps");
     }
   };
@@ -187,13 +189,13 @@ export default function Home() {
         />
       </div>
 
-      {/* Reset Button - Top Right */}
+      {/* Reset Button - Top Right
       <button
         onClick={resetAllStamps}
         className="absolute top-3 right-3 z-20 bg-red-500 text-white px-2 sm:px-4 py-2 text-xs sm:text-base rounded-lg font-semibold hover:bg-red-600 transition-colors shadow-lg"
       >
         Reset
-      </button>
+      </button> */}
 
       {/* Content */}
       <div className="relative z-10 w-[790px] max-w-[95vw] h-[880px] max-h-[90vh] overflow-y-auto rounded-3xl bg-white p-4 sm:p-6">
@@ -213,19 +215,19 @@ export default function Home() {
           <p className="text-[24px] text-[#E38533] font-bold mb-3">
             K. {userName || "Guest"}
           </p>
-          <button onClick={openQRModal} className="bg-[#E38533] text-white font-semibold px-4 py-2 rounded-xl hover:bg-[#aa6427] transition-colors">QRcode</button>
+          <button
+            onClick={openQRModal}
+            className="bg-[#E38533] text-white font-semibold px-4 py-2 rounded-xl hover:bg-[#aa6427] transition-colors"
+          >
+            QRcode
+          </button>
         </div>
         <div className="text-left mb-2 ">
-          <p className="text-[20px] text-black font-bold mb-3">
-            Gold Sponsor
-          </p>
+          <p className="text-[20px] text-black font-bold mb-3">Gold Sponsor</p>
         </div>
         <div className="mb-2 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 sm:gap-4 justify-items-center">
           {sponsors.map((sponsor) => (
-            <div
-              key={sponsor.id}
-              className="relative shadow-md rounded-xl"
-            >
+            <div key={sponsor.id} className="relative shadow-md rounded-xl">
               <Image
                 src={sponsor.image}
                 alt={sponsor.name}
@@ -258,10 +260,7 @@ export default function Home() {
         </div>
         <div className="mb-2 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 sm:gap-4 justify-items-center">
           {silverSponsors.map((sponsor) => (
-            <div
-              key={sponsor.id}
-              className="relative shadow-md rounded-xl"
-            >
+            <div key={sponsor.id} className="relative shadow-md rounded-xl">
               <Image
                 src={sponsor.image}
                 alt={sponsor.name}
@@ -299,6 +298,17 @@ export default function Home() {
             className="bg-white rounded-3xl p-4 sm:p-8 w-[95vw] sm:w-[458px] h-auto max-h-[90vh] mx-4 flex flex-col overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
+            <div className="justify-center flex mb-4">
+              <Image
+                src="/logos/bot.svg"
+                alt="Completed"
+                width={120}
+                height={120}
+                quality={100}
+                unoptimized
+              />
+            </div>
+
             <div className="text-center mb-6">
               <h2 className="text-2xl font-bold text-gray-800">
                 QR Code - K. {userName || "Guest"}
@@ -310,7 +320,7 @@ export default function Home() {
             <div className="flex justify-center mb-6 flex-1 overflow-hidden">
               <div className="flex flex-col items-center">
                 <Image
-                  src="/qrcodes-mock/qrmockup.png"
+                  src="/qrcodes-mock/OIP.webp"
                   alt="QR Code"
                   width={300}
                   height={300}

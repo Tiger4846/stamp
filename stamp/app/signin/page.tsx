@@ -20,8 +20,14 @@ export default function SignUp() {
 
     if (user) {
       // Store user data in localStorage
-      localStorage.setItem("userData", JSON.stringify({ name: user.name, phone: user.phone }));
-      router.push("/home");
+      localStorage.setItem("userData", JSON.stringify({ name: user.name, phone: user.phone, role: user.role }));
+      
+      // Redirect based on role
+      if (user.role === "admin") {
+        router.push("/admin/scan");
+      } else {
+        router.push("/home");
+      }
     } else {
       setError("Invalid phone number. Please try again.");
     }
@@ -32,28 +38,18 @@ export default function SignUp() {
       {/* Background Wave */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/backgrounds/BGwave.svg"
+          src="/backgrounds/BGwave.png"
           alt="Background Wave"
           fill
-          className="object-cover"
+          className="object-cover object-top"
           priority
+          quality={100}
+          unoptimized
         />
       </div>
-      <div className="justify-center pt-10 sm:pt-20 md:pt-90 px-4">
-        {/* Logo */}
-        <div className="relative z-10 flex justify-center">
-          <Image
-            src="/logos/Zenith30.svg"
-            alt="Zenith Logo"
-            width={317}
-            height={142}
-            priority
-            className="w-full max-w-[317px] h-auto"
-          />
-        </div>
-
+      <div className="relative z-10 justify-center pt-10 sm:pt-20 md:pt-90 px-4">
         {/* Sign Up Form Container */}
-        <div className="relative z-10 w-full max-w-md px-4 sm:px-6">
+        <div className="w-full max-w-md px-4 sm:px-6">
           {/* Form Card */}
           <div className="p-6">
             <h1 className="text-[36px] font-bold text-center mb-2 text-black">
