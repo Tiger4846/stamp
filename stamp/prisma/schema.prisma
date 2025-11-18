@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String         @id @default(uuid())
+  name        String
+  role        UserRole      @default(user)
+  phone       String @unique
+  qrCode      String @unique
+
+  managedSponsors Sponsor[]  @relation("SponsorAdmin")
+  stampTotals     UserStamp[]
+  transactions    StampTransaction[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum UserRole {
+  user
+  admin
+}
+
+model Sponsor {
+  id          String       @id @default(uuid())
+  name        String
+  phone       String?
+  level       SponsorLevel
+  adminId     String
+
+  admin         User       @relation("SponsorAdmin", fields: [adminId], references: [id])
+  transactions StampTransaction[]
+  userStamps    UserStamp[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum SponsorLevel {
+  gold
+  silver
+}
+
+model UserStamp {
+  id        String   @id @default(uuid())
+  userId    String
+  sponsorId String
+  total     Int      @default(0)
+
+  user      User     @relation(fields: [userId], references: [id])
+  sponsor   Sponsor  @relation(fields: [sponsorId], references: [id])
+
+  @@unique([userId, sponsorId])
+}
+
+model StampTransaction {
+  id          String   @id @default(uuid())
+  userId      String
+  sponsorId   String
+  amount      Int      @default(1)
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id])
+  sponsor     Sponsor  @relation(fields: [sponsorId], references: [id])
+}
