@@ -1,0 +1,212 @@
+{
+	"info": {
+		"_postman_id": "5727d3e5-1c1f-4bfb-b5c1-20a5ec091a38",
+		"name": "zenith-stamp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38086256"
+	},
+	"item": [
+		{
+			"name": "Sign-up",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"John Doe\",\n    \"phone\": \"0812345678\",\n    \"role\": \"user\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Admin Test5\",\n    \"phone\": \"081234567895\",\n    \"role\": \"admin\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "vary",
+							"value": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 18 Nov 2025 09:06:32 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"user\": {\n        \"id\": \"0d2c9e30-da55-4c61-9fca-66e34570ceb6\",\n        \"name\": \"Admin Test5\",\n        \"phone\": \"081234567895\",\n        \"role\": \"admin\",\n        \"qrCode\": \"https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/qr-codes/081234567895.png\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwZDJjOWUzMC1kYTU1LTRjNjEtOWZjYS02NmUzNDU3MGNlYjYiLCJwaG9uZSI6IjA4MTIzNDU2Nzg5NSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MzQ1Njc5MiwiZXhwIjoxNzY0MDYxNTkyfQ.hc0MluWYpsm_IHG6yYVg6FhSvZgkhFKX67FgzPP8ntI\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Create - boot  (admin)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJkZGQ0YzJjYi05ZDAzLTRhZTMtYmVmMy1lMzQ0ZTQzNjdhNTUiLCJwaG9uZSI6IjA4MTIzNDU2Nzg5Iiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzYzNDUwMjA3LCJleHAiOjE3NjQwNTUwMDd9.gyW2g--CON_3aE1wV5XMO-oBGpvu_bBsU1TZtQ0IwPc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"zenith\",\r\n    \"adminPhone\":\"08123456789\",\r\n    \"level\":\"gold\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/sponsor/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"sponsor",
+						"create"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "invalid case",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"zenith\",\r\n    \"adminPhone\":\"08123456789\",\r\n    \"level\":\"gold\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/sponsor/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"sponsor",
+								"create"
+							]
+						}
+					},
+					"status": "Conflict",
+					"code": 409,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "vary",
+							"value": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 18 Nov 2025 09:10:18 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Sponsor name already exists\"\n}"
+				}
+			]
+		}
+	]
+}
