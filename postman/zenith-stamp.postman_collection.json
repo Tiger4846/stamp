@@ -18,7 +18,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"John Doe\",\n    \"phone\": \"0812345678\",\n    \"role\": \"user\"\n  }",
+					"raw": "{\n    \"name\": \"John Doe\",\n    \"phone\": \"0123456789\",\n    \"role\": \"user\"\n  }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -104,8 +104,194 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"user\": {\n        \"id\": \"0d2c9e30-da55-4c61-9fca-66e34570ceb6\",\n        \"name\": \"Admin Test5\",\n        \"phone\": \"081234567895\",\n        \"role\": \"admin\",\n        \"qrCode\": \"https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/qr-codes/081234567895.png\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIwZDJjOWUzMC1kYTU1LTRjNjEtOWZjYS02NmUzNDU3MGNlYjYiLCJwaG9uZSI6IjA4MTIzNDU2Nzg5NSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MzQ1Njc5MiwiZXhwIjoxNzY0MDYxNTkyfQ.hc0MluWYpsm_IHG6yYVg6FhSvZgkhFKX67FgzPP8ntI\"\n}"
+				},
+				{
+					"name": "Sign-up",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Doe\",\n    \"phone\": \"0123456789\",\n    \"role\": \"user\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "vary",
+							"value": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 19 Nov 2025 04:14:50 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"user\": {\n        \"id\": \"feb1665e-a1d1-4119-ad09-425da4c8a7d0\",\n        \"name\": \"John Doe\",\n        \"phone\": \"0123456789\",\n        \"role\": \"user\",\n        \"qrCode\": \"https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/qr-codes/0123456789.png\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJmZWIxNjY1ZS1hMWQxLTQxMTktYWQwOS00MjVkYTRjOGE3ZDAiLCJwaG9uZSI6IjAxMjM0NTY3ODkiLCJyb2xlIjoidXNlciIsImlhdCI6MTc2MzUyNTY5MCwiZXhwIjoxNzY0MTMwNDkwfQ.cUzxNGjSfHiGVXv_4Y34j0B9geXK_Rmbz3TwGRjvvQw\"\n}"
 				}
 			]
+		},
+		{
+			"name": "Sign-in",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"phone\": \"0812345678\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "me",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"phone\": \"0812345678\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/me",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get stamps",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{userAccess}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"phone\": \"0812345678\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/user/stamps",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"stamps"
+					]
+				}
+			},
+			"response": []
 		},
 		{
 			"name": "Create - boot  (admin)",
@@ -205,8 +391,130 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"error\": \"Sponsor name already exists\"\n}"
+				},
+				{
+					"name": "Success case",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"zenith556\",\r\n    \"adminPhone\":\"0123456789\",\r\n    \"level\":\"gold\",\r\n    \"logoUrl\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlRQxr-4qhnn5uWHkEbNDdUu6zAzm0pQkT_A&s\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/sponsor/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"sponsor",
+								"create"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "vary",
+							"value": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 19 Nov 2025 04:15:17 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"f6115d50-c0af-4ec0-99ff-f9d9ca046300\",\n    \"name\": \"zenith556\",\n    \"phone\": null,\n    \"level\": \"gold\",\n    \"adminId\": \"feb1665e-a1d1-4119-ad09-425da4c8a7d0\",\n    \"logoUrl\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlRQxr-4qhnn5uWHkEbNDdUu6zAzm0pQkT_A&s\",\n    \"createdAt\": \"2025-11-19T04:15:17.617Z\",\n    \"updatedAt\": \"2025-11-19T04:15:17.617Z\"\n}"
 				}
 			]
+		},
+		{
+			"name": "List - boot",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJkZGQ0YzJjYi05ZDAzLTRhZTMtYmVmMy1lMzQ0ZTQzNjdhNTUiLCJwaG9uZSI6IjA4MTIzNDU2Nzg5Iiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzYzNDUwMjA3LCJleHAiOjE3NjQwNTUwMDd9.gyW2g--CON_3aE1wV5XMO-oBGpvu_bBsU1TZtQ0IwPc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/sponsor/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"sponsor",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stamp add",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{adminAccess}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/stamp/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"stamp",
+						"add"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

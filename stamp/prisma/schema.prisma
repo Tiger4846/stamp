@@ -20,6 +20,7 @@ model User {
   role        UserRole      @default(user)
   phone       String @unique
   qrCode      String @unique
+  isClaimed   Boolean      @default(false)
 
   managedSponsors Sponsor[]  @relation("SponsorAdmin")
   stampTotals     UserStamp[]
