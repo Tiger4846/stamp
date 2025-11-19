@@ -1,18 +1,30 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { Html5QrcodeScanner } from "html5-qrcode";
+import { Html5Qrcode } from "html5-qrcode";
+import { useStampAdd } from "@/hooks/useStampAdd";
+
+interface SuccessData {
+  userName: string;
+  sponsorName: string;
+  totalStamps: number;
+}
 
 export default function AdminScan() {
   const router = useRouter();
+  const { addStamp, isLoading, error } = useStampAdd();
   const [adminName, setAdminName] = useState("");
   const [scanning, setScanning] = useState(false);
   const [scannedData, setScannedData] = useState("");
   const [message, setMessage] = useState("");
-  const [scannerInstance, setScannerInstance] =
-    useState<Html5QrcodeScanner | null>(null);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [successData, setSuccessData] = useState<SuccessData | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+  
+  const qrReaderRef = useRef<HTMLDivElement>(null);
+  const html5QrCodeRef = useRef<Html5Qrcode | null>(null);
 
   useEffect(() => {
     // Check if user is admin
@@ -33,103 +45,155 @@ export default function AdminScan() {
     checkAuth();
   }, [router]);
 
-  const stopScanning = () => {
+  const stopScanning = async () => {
+    if (html5QrCodeRef.current) {
+      try {
+        await html5QrCodeRef.current.stop();
+        html5QrCodeRef.current.clear();
+      } catch (err) {
+        console.error("Error stopping scanner:", err);
+      }
+    }
+    html5QrCodeRef.current = null;
     setScanning(false);
-    setScannerInstance(null);
   };
 
-  const processQRCode = (data: string) => {
-    // Here you would process the QR code data
-    // For now, just display a success message
-    setMessage(`✅ Stamp recorded for user: ${data}`);
-    setScannedData("");
+  const processQRCode = async (data: string) => {
+    // Prevent multiple simultaneous processing
+    if (isProcessing) {
+      console.log("Already processing, skipping...");
+      return;
+    }
 
-    // In a real implementation, you would:
-    // 1. Parse the QR code data to get user phone
-    // 2. Update the user's completed stamps in database
-    // 3. Show success/error message
+    // Validate phone number format
+    if (!data.trim()) {
+      setMessage("❌ Invalid QR code data");
+      return;
+    }
+
+    setIsProcessing(true);
+    
+    try {
+      setMessage("⏳ Processing stamp...");
+      const response = await addStamp({ phone: data });
+      
+      if (response) {
+        // Show success modal
+        setSuccessData({
+          userName: response.user.name,
+          sponsorName: response.sponsor.name,
+          totalStamps: response.newTotal,
+        });
+        setShowSuccessModal(true);
+        setScannedData("");
+        // Stop scanner after successful scan
+        await stopScanning();
+      }
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "Failed to add stamp";
+      
+      // Handle authentication errors
+      if (
+        errorMessage.toLowerCase().includes('authentication') || 
+        errorMessage.toLowerCase().includes('token') ||
+        errorMessage.toLowerCase().includes('unauthorized')
+      ) {
+        localStorage.removeItem('userData');
+        localStorage.removeItem('token');
+        setMessage("❌ Session expired. Redirecting to login...");
+        setTimeout(() => {
+          router.push('/signin');
+        }, 2000);
+        return;
+      }
+      
+      setMessage(`❌ Error: ${errorMessage}`);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
-  // Handle scanner initialization when scanning state changes
+  // Handle scanner initialization and cleanup
   useEffect(() => {
-    if (scanning && !scannerInstance) {
-      const scanner = new Html5QrcodeScanner(
-        "qr-reader",
-        {
+    let mounted = true;
+
+    const initScanner = async () => {
+      if (!scanning || !qrReaderRef.current) return;
+
+      try {
+        const html5QrCode = new Html5Qrcode("qr-reader");
+        html5QrCodeRef.current = html5QrCode;
+
+        const config = {
           fps: 10,
           qrbox: { width: 250, height: 250 },
           aspectRatio: 1.0,
-          showTorchButtonIfSupported: true,
-          showZoomSliderIfSupported: true,
-          defaultZoomValueIfSupported: 2,
-        },
-        false // verbose
-      );
+        };
 
-      // Success callback
-      const onScanSuccess = (decodedText: string) => {
-        console.log("QR Code detected:", decodedText);
-        setMessage(`✅ QR Code scanned: ${decodedText}`);
-        processQRCode(decodedText);
-        stopScanning();
-      };
-
-      // Error callback
-      const onScanError = (errorMessage: string) => {
-        // Ignore scan errors, only show camera errors
-        console.log("Scan error:", errorMessage);
-      };
-
-      // Wait for DOM element to be ready
-      let attempts = 0;
-      const maxAttempts = 20;
-
-      const initScanner = () => {
-        const element = document.getElementById("qr-reader");
-        if (element) {
-          try {
-            scanner.render(onScanSuccess, onScanError);
-            setScannerInstance(scanner);
-            setMessage("✅ Camera is ready! Point at QR code");
-          } catch (renderError) {
-            console.error("Error rendering scanner:", renderError);
-            setMessage(
-              `❌ Cannot start camera: ${
-                renderError instanceof Error
-                  ? renderError.message
-                  : "Unknown error"
-              }. Please use manual input.`
-            );
-            setScanning(false);
+        await html5QrCode.start(
+          { facingMode: "environment" }, // Use back camera
+          config,
+          (decodedText) => {
+            if (mounted) {
+              console.log("QR Code detected:", decodedText);
+              setMessage(`✅ QR Code scanned: ${decodedText}`);
+              processQRCode(decodedText);
+            }
+          },
+          (errorMessage) => {
+            // Ignore continuous scanning errors
+            // Only log for debugging
+            // console.log("Scan error:", errorMessage);
           }
-        } else if (attempts < maxAttempts) {
-          attempts++;
-          setTimeout(initScanner, 100);
-        } else {
-          console.error("QR reader element not found after maximum attempts");
+        );
+
+        if (mounted) {
+          setMessage("✅ Camera is ready! Point at QR code");
+        }
+      } catch (err) {
+        console.error("Error starting scanner:", err);
+        if (mounted) {
           setMessage(
-            "❌ Camera initialization failed. Please refresh and try again."
+            `❌ Cannot start camera: ${
+              err instanceof Error ? err.message : "Unknown error"
+            }. Please use manual input.`
           );
           setScanning(false);
         }
-      };
+      }
+    };
 
-      setTimeout(initScanner, 50);
-    } else if (!scanning && scannerInstance) {
-      // Clean up scanner when stopping
-      scannerInstance.clear().catch(console.error);
+    if (scanning) {
+      // Small delay to ensure DOM is ready
+      setTimeout(initScanner, 100);
     }
-  }, [scanning, scannerInstance]);
+
+    // Cleanup function
+    return () => {
+      mounted = false;
+      if (html5QrCodeRef.current) {
+        html5QrCodeRef.current
+          .stop()
+          .then(() => {
+            html5QrCodeRef.current?.clear();
+          })
+          .catch((err) => {
+            console.error("Cleanup error:", err);
+          });
+      }
+    };
+  }, [scanning]); // Remove processQRCode from dependencies to avoid recreation
 
   const startScanning = async (forceEnable = false) => {
-    // Check if running on HTTPS or localhost (skip in development or force enable)
+    // Check if running on HTTPS or localhost
     const isDevelopment = process.env.NODE_ENV === "development";
     if (
       !forceEnable &&
       !isDevelopment &&
-      location.protocol !== "https:" &&
-      location.hostname !== "localhost" &&
-      location.hostname !== "127.0.0.1"
+      typeof window !== "undefined" &&
+      window.location.protocol !== "https:" &&
+      window.location.hostname !== "localhost" &&
+      window.location.hostname !== "127.0.0.1"
     ) {
       setMessage(
         "❌ Camera access requires HTTPS or localhost. Please use manual input or access via secure connection."
@@ -150,7 +214,21 @@ export default function AdminScan() {
 
   const handleLogout = () => {
     localStorage.removeItem("userData");
+    localStorage.removeItem("token");
     router.push("/signin");
+  };
+
+  const handleSuccessModalClose = () => {
+    setShowSuccessModal(false);
+    setMessage("");
+    setSuccessData(null);
+  };
+
+  const handleScanNext = () => {
+    setShowSuccessModal(false);
+    setMessage("");
+    setSuccessData(null);
+    startScanning(false);
   };
 
   return (
@@ -201,10 +279,14 @@ export default function AdminScan() {
           <div className="w-full max-w-[400px] bg-gray-100 rounded-2xl overflow-hidden shadow-lg">
             {scanning ? (
               <div className="relative aspect-square bg-black">
-                <div id="qr-reader" className="w-full h-full"></div>
+                <div 
+                  ref={qrReaderRef}
+                  id="qr-reader" 
+                  className="w-full h-full"
+                ></div>
                 <div className="absolute bottom-4 left-0 right-0 text-center">
                   <p className="text-white bg-black/50 px-4 py-2 rounded-full inline-block">
-                    Camera Active - Point at QR Code
+                    {isProcessing ? "Processing..." : "Camera Active - Point at QR Code"}
                   </p>
                 </div>
               </div>
@@ -236,7 +318,8 @@ export default function AdminScan() {
               <div className="flex flex-col gap-2">
                 <button
                   onClick={() => startScanning(false)}
-                  className="w-full h-12 bg-[#E38533] text-white rounded-full font-semibold hover:bg-[#aa6427] transition-colors shadow-lg"
+                  disabled={isProcessing}
+                  className="w-full h-12 bg-[#E38533] text-white rounded-full font-semibold hover:bg-[#aa6427] transition-colors shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed"
                 >
                   Start Scanner
                 </button>
@@ -257,9 +340,10 @@ export default function AdminScan() {
             ) : (
               <button
                 onClick={stopScanning}
-                className="w-full h-12 bg-red-500 text-white rounded-full font-semibold hover:bg-red-600 transition-colors shadow-lg"
+                disabled={isProcessing}
+                className="w-full h-12 bg-red-500 text-white rounded-full font-semibold hover:bg-red-600 transition-colors shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
-                Stop Scanner
+                {isProcessing ? "Processing..." : "Stop Scanner"}
               </button>
             )}
 
@@ -274,13 +358,15 @@ export default function AdminScan() {
                   value={scannedData}
                   onChange={(e) => setScannedData(e.target.value)}
                   placeholder="Enter user phone number"
-                  className="flex-1 px-4 py-2 rounded-full border border-gray-300 focus:ring-2 focus:ring-[#E38533] focus:border-transparent outline-none"
+                  disabled={isLoading || isProcessing}
+                  className="flex-1 px-4 py-2 rounded-full border border-gray-300 focus:ring-2 focus:ring-[#E38533] focus:border-transparent outline-none disabled:bg-gray-100"
                 />
                 <button
                   type="submit"
-                  className="px-6 py-2 bg-green-500 text-white rounded-full font-semibold hover:bg-green-600 transition-colors"
+                  disabled={isLoading || isProcessing}
+                  className="px-6 py-2 bg-green-500 text-white rounded-full font-semibold hover:bg-green-600 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
                 >
-                  Submit
+                  {isLoading || isProcessing ? "Processing..." : "Submit"}
                 </button>
               </form>
             </div>
@@ -297,7 +383,7 @@ export default function AdminScan() {
                 }`}
               >
                 {message}
-                {message.includes("❌") && (
+                {message.includes("❌") && !message.includes("Session expired") && (
                   <div className="mt-2 text-sm">
                     <p>Troubleshooting tips:</p>
                     <ul className="text-left list-disc list-inside mt-1">
@@ -333,6 +419,74 @@ export default function AdminScan() {
           </div>
         </div>
       </div>
+
+      {/* Success Modal */}
+      {showSuccessModal && successData && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-3xl p-8 max-w-md w-[90vw] shadow-2xl animate-bounce-in">
+            {/* Success Icon */}
+            <div className="flex justify-center mb-6">
+              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
+                <svg
+                  className="w-12 h-12 text-green-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            {/* Content */}
+            <h2 className="text-2xl font-bold text-center text-gray-800 mb-4">
+              ✅ Stamp Recorded Successfully!
+            </h2>
+
+            <div className="bg-gray-50 rounded-2xl p-4 mb-6 space-y-3">
+              <div className="flex justify-between items-center border-b pb-2">
+                <span className="text-gray-600">User:</span>
+                <span className="font-semibold text-gray-800">
+                  {successData.userName}
+                </span>
+              </div>
+              <div className="flex justify-between items-center border-b pb-2">
+                <span className="text-gray-600">Sponsor:</span>
+                <span className="font-semibold text-gray-800">
+                  {successData.sponsorName}
+                </span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-gray-600">Total Stamps:</span>
+                <span className="font-bold text-lg text-[#E38533]">
+                  {successData.totalStamps} 🎫
+                </span>
+              </div>
+            </div>
+
+            {/* Buttons */}
+            <div className="flex flex-col gap-3">
+              <button
+                onClick={handleScanNext}
+                className="w-full bg-[#E38533] text-white py-3 rounded-full font-semibold hover:bg-[#aa6427] transition-colors shadow-lg"
+              >
+                📷 Scan Next QR Code
+              </button>
+              <button
+                onClick={handleSuccessModalClose}
+                className="w-full bg-gray-200 text-gray-700 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors"
+              >
+                Done
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
