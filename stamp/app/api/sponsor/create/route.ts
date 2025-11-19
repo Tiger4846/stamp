@@ -4,7 +4,7 @@ import prisma from "@/lib/prisma";
 export async function POST(req: NextRequest) {
   try {
     const data = await req.json();
-    const { name, adminPhone, level } = data;
+    const { name, adminPhone, level, logoUrl } = data;
 
     if (!name || !level || !adminPhone) {
       return NextResponse.json(
@@ -63,6 +63,7 @@ export async function POST(req: NextRequest) {
         phone: null,
         level,
         adminId: adminUser.id,
+        logoUrl: logoUrl || null,
       },
     });
 

@@ -40,6 +40,7 @@ model Sponsor {
   phone       String?
   level       SponsorLevel
   adminId     String
+  logoUrl     String?
 
   admin         User       @relation("SponsorAdmin", fields: [adminId], references: [id])
   transactions StampTransaction[]
