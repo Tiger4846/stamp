@@ -291,7 +291,64 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "success case",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/user/stamps",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"stamps"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "vary",
+							"value": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 19 Nov 2025 09:26:48 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"stamps\": [\n        {\n            \"sponsorId\": \"95233ace-3f93-4d78-9d94-31a95c323e4b\",\n            \"sponsorName\": \"zenith\",\n            \"sponsorLevel\": \"gold\",\n            \"total\": 320\n        },\n        {\n            \"sponsorId\": \"7c63b49d-c48e-4c20-ac42-8e740b5faa65\",\n            \"sponsorName\": \"zenith6\",\n            \"sponsorLevel\": \"gold\",\n            \"total\": 2\n        },\n        {\n            \"sponsorId\": \"57729862-ffdf-47bc-a665-0e2748ccfff2\",\n            \"sponsorName\": \"zenith55\",\n            \"sponsorLevel\": \"gold\",\n            \"total\": 1\n        }\n    ],\n    \"totalStamps\": 323,\n    \"sponsorCount\": 3\n}"
+				}
+			]
 		},
 		{
 			"name": "Create - boot  (admin)",
