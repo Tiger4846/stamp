@@ -1,0 +1,36 @@
+{
+  "_description": "User stamp totals - aggregated stamps collected by users from sponsors",
+  "_schema": {
+    "userPhone": "string - Phone number of user (must exist in users.json)",
+    "sponsorId": "string - ID of sponsor (must exist in sponsors.json)",
+    "total": "number - Total number of stamps collected from this sponsor"
+  },
+  "_note": "This represents the current stamp balance for each user-sponsor combination",
+  "userStamps": [
+    {
+      "userPhone": "0987654321",
+      "sponsorId": "gold-sponsor-1",
+      "total": 8
+    },
+    {
+      "userPhone": "0823456789",
+      "sponsorId": "silver-sponsor-1",
+      "total": 5
+    },
+    {
+      "userPhone": "0834567890",
+      "sponsorId": "gold-sponsor-2",
+      "total": 12
+    },
+    {
+      "userPhone": "0845678901",
+      "sponsorId": "silver-sponsor-1",
+      "total": 3
+    },
+    {
+      "userPhone": "0856789012",
+      "sponsorId": "gold-sponsor-1",
+      "total": 15
+    }
+  ]
+}

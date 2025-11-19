@@ -1,0 +1,19 @@
+{
+  "_description": "Template for adding new users",
+  "_template": {
+    "name": "Full Name Here",
+    "phone": "0XXXXXXXXX",
+    "role": "user",
+    "qrCode": "QR_USER_XXX",
+    "isClaimed": false
+  },
+  "users": [
+    {
+      "name": "Your Name",
+      "phone": "0800000002",
+      "role": "user", 
+      "qrCode": "QR_USER_007",
+      "isClaimed": false
+    }
+  ]
+}

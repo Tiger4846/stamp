@@ -1,0 +1,15 @@
+{
+  "_description": "Template for adding user stamp totals",
+  "_template": {
+    "userPhone": "0XXXXXXXXX",
+    "sponsorId": "sponsor-id-here",
+    "total": 0
+  },
+  "userStamps": [
+    {
+      "userPhone": "0800000002",
+      "sponsorId": "gold-sponsor-6", 
+      "total": 5
+    }
+  ]
+}

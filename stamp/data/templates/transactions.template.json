@@ -1,0 +1,15 @@
+{
+  "_description": "Template for adding new transactions",
+  "_template": {
+    "userPhone": "0XXXXXXXXX",
+    "sponsorId": "sponsor-id-here",
+    "amount": 1
+  },
+  "transactions": [
+    {
+      "userPhone": "0800000002",
+      "sponsorId": "gold-sponsor-6",
+      "amount": 2
+    }
+  ]
+}
