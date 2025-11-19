@@ -65,8 +65,8 @@
       "isClaimed": false
     },
     {
-      "id": "admin-cumulate",
-      "name": "Cumulate Admin",
+      "id": "admin-cymulate",
+      "name": "Cymulate Admin",
       "phone": "61-2-555-1003",
       "role": "admin",
       "qrCode": "QR_USER_008",
