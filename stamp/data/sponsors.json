@@ -49,28 +49,28 @@
       "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/gold-sponsor/trend-micro.png"
     },
     {
+      "id": "gold-sponsor-6",
+      "name": "AWS",
+      "phone": "61-2-555-1002",
+      "level": "gold",
+      "adminId": "admin-aws",
+      "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/RE13VQ9.png"
+    },
+    {
       "id": "silver-sponsor-1",
-      "name": "Cloudflare",
+      "name": "nForce",
       "phone": "61-2-555-1001",
       "level": "silver",
-      "adminId": "admin-cloudflare",
-      "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/cloudflare.png"
+      "adminId": "admin-nforce",
+      "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/nForce.png"
     },
     {
       "id": "silver-sponsor-2",
       "name": "CyberArk",
-      "phone": "61-2-555-1002",
+      "phone": "61-2-555-1003",
       "level": "silver",
       "adminId": "admin-cyberark",
       "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/cyberark.png"
-    },
-    {
-      "id": "silver-sponsor-3",
-      "name": "Cymulate",
-      "phone": "61-2-555-1003",
-      "level": "silver",
-      "adminId": "admin-cymulate",
-      "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/cumulate.png"
     },
     {
       "id": "silver-sponsor-4",
@@ -138,11 +138,11 @@
     },
     {
       "id": "silver-sponsor-12",
-      "name": "Semperis",
+      "name": "Truvisor",
       "phone": "61-2-555-1012",
       "level": "silver",
-      "adminId": "admin-semperis",
-      "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/semperis.png"
+      "adminId": "admin-truvisor",
+      "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/truvisor.png"
     },
     {
       "id": "silver-sponsor-13",
@@ -151,14 +151,6 @@
       "level": "silver",
       "adminId": "admin-veeam",
       "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/veeam.png"
-    },
-    {
-      "id": "silver-sponsor-14",
-      "name": "Vicarious",
-      "phone": "61-2-555-1014",
-      "level": "silver",
-      "adminId": "admin-vicarious",
-      "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/vicarious.png"
     }
   ]
 }

@@ -49,8 +49,16 @@
       "isClaimed": false
     },
     {
-      "id": "admin-cloudflare",
-      "name": "Cloudflare Admin",
+      "id": "admin-aws",
+      "name": "AWS Admin",
+      "phone": "61-2-555-1002",
+      "role": "admin",
+      "qrCode": "QR_USER_019",
+      "isClaimed": false
+    },
+    {
+      "id": "admin-nforce",
+      "name": "nForce Admin",
       "phone": "61-2-555-1001",
       "role": "admin",
       "qrCode": "QR_USER_006",
@@ -59,17 +67,9 @@
     {
       "id": "admin-cyberark",
       "name": "CyberArk Admin",
-      "phone": "61-2-555-1002",
-      "role": "admin",
-      "qrCode": "QR_USER_007",
-      "isClaimed": false
-    },
-    {
-      "id": "admin-cymulate",
-      "name": "Cymulate Admin",
       "phone": "61-2-555-1003",
       "role": "admin",
-      "qrCode": "QR_USER_008",
+      "qrCode": "QR_USER_007",
       "isClaimed": false
     },
     {
@@ -137,8 +137,8 @@
       "isClaimed": false
     },
     {
-      "id": "admin-semperis",
-      "name": "Semperis Admin",
+      "id": "admin-truvisor",
+      "name": "Truvisor Admin",
       "phone": "61-2-555-1012",
       "role": "admin",
       "qrCode": "QR_USER_017",
@@ -150,14 +150,6 @@
       "phone": "61-2-555-1013",
       "role": "admin",
       "qrCode": "QR_USER_018",
-      "isClaimed": false
-    },
-    {
-      "id": "admin-vicarious",
-      "name": "Vicarious Admin",
-      "phone": "61-2-555-1014",
-      "role": "admin",
-      "qrCode": "QR_USER_019",
       "isClaimed": false
     }
   ]
