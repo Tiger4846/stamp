@@ -461,12 +461,12 @@ export default function AdminScan() {
                   {successData.sponsorName}
                 </span>
               </div>
-              <div className="flex justify-between items-center">
+              {/* <div className="flex justify-between items-center">
                 <span className="text-gray-600">Total Stamps:</span>
                 <span className="font-bold text-lg text-[#E38533]">
                   {successData.totalStamps} 🎫
                 </span>
-              </div>
+              </div> */}
             </div>
 
             {/* Buttons */}
