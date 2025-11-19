@@ -1,35 +1,22 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import usersData from "@/data/users.json";
+import { useSignIn } from "@/hooks/useSignIn";
 
-export default function SignUp() {
-  const router = useRouter();
+export default function SignIn() {
+  const { signIn, isLoading, error, setError } = useSignIn();
   const [phone, setPhone] = useState("");
-  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
     
-    // Check if user exists in mock data
-    const user = usersData.users.find(
-      (u) => u.phone === phone
-    );
-
-    if (user) {
-      // Store user data in localStorage
-      localStorage.setItem("userData", JSON.stringify({ name: user.name, phone: user.phone, role: user.role }));
-      
-      // Redirect based on role
-      if (user.role === "admin") {
-        router.push("/admin/scan");
-      } else {
-        router.push("/home");
-      }
-    } else {
-      setError("Invalid phone number. Please try again.");
+    try {
+      await signIn({ phone });
+    } catch (err) {
+      // Error is already handled in the hook
+      console.error('Sign in error:', err);
     }
   };
 
@@ -84,12 +71,13 @@ export default function SignUp() {
                 />
               </div>
 
-              {/* Sign Up Button */}
+              {/* Sign In Button */}
               <button
                 type="submit"
-                className="w-full max-w-[460px] h-11 bg-[#E38533] text-white rounded-full font-semibold hover:bg-[#aa6427] transition-colors shadow-lg hover:shadow-sm"
+                disabled={isLoading}
+                className="w-full max-w-[460px] h-11 bg-[#E38533] text-white rounded-full font-semibold hover:bg-[#aa6427] transition-colors shadow-lg hover:shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Sign In
+                {isLoading ? 'Signing In...' : 'Sign In'}
               </button>
             </form>
 
