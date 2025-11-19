@@ -3,10 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run db:generate && npm run db:migrate && next dev",
+    "dev:setup": "npm run db:up && npm run db:migrate && npm run db:generate",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:up": "docker-compose -f docker-compose.db.yaml up -d",
+    "db:down": "docker-compose -f docker-compose.db.yaml down",
+    "db:migrate": "prisma migrate deploy",
+    "db:generate": "prisma generate",
+    "db:studio": "prisma studio",
+    "db:reset": "prisma migrate reset --force",
+    "db:clear": "npx dotenv-cli tsx prisma/clear.ts",
+    "db:clear:transactions": "npx dotenv-cli tsx prisma/clear.ts -- --transactions",
+    "db:clear:stamps": "npx dotenv-cli tsx prisma/clear.ts -- --stamps",
+    "db:clear:sponsors": "npx dotenv-cli tsx prisma/clear.ts -- --sponsors",
+    "db:clear:users": "npx dotenv-cli tsx prisma/clear.ts -- --users",
+    "db:clear:help": "npx dotenv-cli tsx prisma/clear.ts -- --help",
+    "db:check": "npx dotenv-cli tsx prisma/check.ts",
+    "db:seed": "npx dotenv-cli tsx prisma/seed.ts",
+    "db:seed:users": "npx dotenv-cli tsx prisma/seed.ts -- --users",
+    "db:seed:sponsors": "npx dotenv-cli tsx prisma/seed.ts -- --sponsors",
+    "db:seed:stamps": "npx dotenv-cli tsx prisma/seed.ts -- --stamps",
+    "db:seed:transactions": "npx dotenv-cli tsx prisma/seed.ts -- --transactions",
+    "db:seed:help": "npx dotenv-cli tsx prisma/seed.ts -- --help"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.933.0",
@@ -25,10 +45,15 @@
     "@types/qrcode": "^1.5.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv-cli": "^11.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.0.3",
     "prisma": "^6.19.0",
     "tailwindcss": "^4",
+    "tsx": "^4.20.6",
     "typescript": "^5"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   }
 }
