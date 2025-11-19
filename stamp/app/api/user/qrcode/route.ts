@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server';
 import { getCurrentUser, unauthorizedResponse } from '@/lib/auth';
+import prisma from '@/lib/prisma';
 
 export async function GET(request: NextRequest) {
   try {
@@ -9,10 +10,25 @@ export async function GET(request: NextRequest) {
       return unauthorizedResponse();
     }
 
-    // Return QR code URL from JWT payload or fetch from DB
+    // Fetch QR code from database
+    const user = await prisma.user.findUnique({
+      where: { id: currentUser.userId },
+      select: {
+        qrCode: true,
+        phone: true,
+      },
+    });
+
+    if (!user) {
+      return Response.json(
+        { error: 'User not found' },
+        { status: 404 }
+      );
+    }
+
     return Response.json({
-      qrCode: currentUser.qrCode || `Generated QR for ${currentUser.phone}`,
-      phone: currentUser.phone,
+      qrCode: user.qrCode,
+      phone: user.phone,
     });
 
   } catch (error) {
