@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useUser } from "@/hooks/useUser";
+import { useSponsors } from "@/hooks/useSponsors";
 
-interface Sponsor {
+interface SponsorDisplay {
   id: string;
   name: string;
   image: string;
@@ -11,152 +13,40 @@ interface Sponsor {
 }
 
 export default function Home() {
-  const [userName, setUserName] = useState("");
+  const { user } = useUser();
+  const { sponsors: apiSponsors, completedSponsors } = useSponsors();
   const [showQRModal, setShowQRModal] = useState(false);
-  const [sponsors, setSponsors] = useState<Sponsor[]>([
-    // Gold Sponsors
-    {
-      id: "zenith",
-      name: "ZenithComp",
-      image: "/images/GoldSponsor/1.svg",
-      completed: false,
-    },
-    {
-      id: "nutanix",
-      name: "Nutanix",
-      image: "/images/GoldSponsor/2.svg",
-      completed: false,
-    },
-    {
-      id: "trendmicro",
-      name: "Trend Micro",
-      image: "/images/GoldSponsor/3.svg",
-      completed: false,
-    },
-    {
-      id: "lenovo",
-      name: "Lenovo",
-      image: "/images/GoldSponsor/4.svg",
-      completed: false,
-    },
-    {
-      id: "hpearuba",
-      name: "HPE Aruba",
-      image: "/images/GoldSponsor/5.svg",
-      completed: false,
-    },
-  ]);
-
-  const [silverSponsors, setSilverSponsors] = useState<Sponsor[]>([
-    {
-      id: "oneidentity",
-      name: "One Identity",
-      image: "/images/SilverSponsor/1.svg",
-      completed: false,
-    },
-    {
-      id: "secsiron",
-      name: "Secsiron",
-      image: "/images/SilverSponsor/2.svg",
-      completed: false,
-    },
-    {
-      id: "pre",
-      name: "PRE",
-      image: "/images/SilverSponsor/3.svg",
-      completed: false,
-    },
-    {
-      id: "cloudflare",
-      name: "CloudFlare",
-      image: "/images/SilverSponsor/4.svg",
-      completed: false,
-    },
-    {
-      id: "cymulate",
-      name: "Cymulate",
-      image: "/images/SilverSponsor/5.svg",
-      completed: false,
-    },
-    {
-      id: "paloalto",
-      name: "Palo Alto",
-      image: "/images/SilverSponsor/6.svg",
-      completed: false,
-    },
-    {
-      id: "groupib",
-      name: "Group-IB",
-      image: "/images/SilverSponsor/7.svg",
-      completed: false,
-    },
-    {
-      id: "cyberark",
-      name: "CyberARK",
-      image: "/images/SilverSponsor/8.svg",
-      completed: false,
-    },
-    {
-      id: "fortinet",
-      name: "Fortinet",
-      image: "/images/SilverSponsor/9.svg",
-      completed: false,
-    },
-    {
-      id: "veeam",
-      name: "Veeam",
-      image: "/images/SilverSponsor/10.svg",
-      completed: false,
-    },
-    {
-      id: "vicarius",
-      name: "Vicarius",
-      image: "/images/SilverSponsor/11.svg",
-      completed: false,
-    },
-    {
-      id: "semperis",
-      name: "Semperis",
-      image: "/images/SilverSponsor/12.svg",
-      completed: false,
-    },
-    {
-      id: "radware",
-      name: "Radware",
-      image: "/images/SilverSponsor/13.svg",
-      completed: false,
-    },
-    {
-      id: "proofpoint",
-      name: "Proofpoint",
-      image: "/images/SilverSponsor/14.svg",
-      completed: false,
-    },
-  ]);
+  const [sponsors, setSponsors] = useState<SponsorDisplay[]>([]);
+  const [silverSponsors, setSilverSponsors] = useState<SponsorDisplay[]>([]);
 
   useEffect(() => {
     const loadData = () => {
-      const userData = localStorage.getItem("userData");
-      if (userData) {
-        const { name } = JSON.parse(userData);
-        setUserName(name);
-      }
+      const goldSponsors = apiSponsors
+        .filter((s) => s.level === "gold")
+        .map((s) => ({
+          id: s.id,
+          name: s.name,
+          image: s.logoUrl || "/images/GoldSponsor/placeholder.svg",
+          completed: completedSponsors.has(s.id),
+        }));
 
-      // Load completed stamps from localStorage
-      const savedStamps = localStorage.getItem("completedStamps");
-      if (savedStamps) {
-        const completed = JSON.parse(savedStamps);
-        setSponsors((prev) =>
-          prev.map((s) => ({ ...s, completed: completed.includes(s.id) }))
-        );
-        setSilverSponsors((prev) =>
-          prev.map((s) => ({ ...s, completed: completed.includes(s.id) }))
-        );
-      }
+      const silverSponsorsData = apiSponsors
+        .filter((s) => s.level === "silver")
+        .map((s) => ({
+          id: s.id,
+          name: s.name,
+          image: s.logoUrl || "/images/SilverSponsor/placeholder.svg",
+          completed: completedSponsors.has(s.id),
+        }));
+
+      setSponsors(goldSponsors);
+      setSilverSponsors(silverSponsorsData);
     };
 
-    loadData();
-  }, []);
+    if (apiSponsors.length > 0) {
+      loadData();
+    }
+  }, [apiSponsors, completedSponsors]);
 
   const openQRModal = () => {
     setShowQRModal(true);
@@ -164,16 +54,6 @@ export default function Home() {
 
   const closeQRModal = () => {
     setShowQRModal(false);
-  };
-
-  const resetAllStamps = () => {
-    if (confirm("Are you sure you want to reset all stamps?")) {
-      setSponsors((prev) => prev.map((s) => ({ ...s, completed: false })));
-      setSilverSponsors((prev) =>
-        prev.map((s) => ({ ...s, completed: false }))
-      );
-      localStorage.removeItem("completedStamps");
-    }
   };
 
   return (
@@ -213,7 +93,7 @@ export default function Home() {
         </div>
         <div className="flex justify-between items-center my-4">
           <p className="text-[24px] text-[#E38533] font-bold mb-3">
-            K. {userName || "Guest"}
+            K. {user?.name || "Guest"}
           </p>
           <button
             onClick={openQRModal}
@@ -311,7 +191,7 @@ export default function Home() {
 
             <div className="text-center mb-6">
               <h2 className="text-2xl font-bold text-gray-800">
-                QR Code - K. {userName || "Guest"}
+                QR Code - K. {user?.name || "Guest"}
               </h2>
               <p className="text-gray-500 mt-2">
                 Show this QR code to collect stamps
@@ -320,7 +200,7 @@ export default function Home() {
             <div className="flex justify-center mb-6 flex-1 overflow-hidden">
               <div className="flex flex-col items-center">
                 <Image
-                  src="/qrcodes-mock/OIP.webp"
+                  src={user?.qrCode || "/qrcodes-mock/OIP.webp"}
                   alt="QR Code"
                   width={300}
                   height={300}
