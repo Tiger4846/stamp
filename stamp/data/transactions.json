@@ -1,0 +1,46 @@
+{
+  "_description": "Stamp transactions - individual stamp giving/receiving events",
+  "_schema": {
+    "userPhone": "string - Phone number of user (must exist in users.json)",
+    "sponsorId": "string - ID of sponsor (must exist in sponsors.json)",
+    "amount": "number - Number of stamps in this transaction (default: 1)"
+  },
+  "_note": "Each transaction represents a single stamp-giving event. Multiple transactions can exist between the same user-sponsor pair.",
+  "transactions": [
+    {
+      "userPhone": "0987654321",
+      "sponsorId": "gold-sponsor-1",
+      "amount": 3
+    },
+    {
+      "userPhone": "0987654321",
+      "sponsorId": "gold-sponsor-1",
+      "amount": 2
+    },
+    {
+      "userPhone": "0823456789",
+      "sponsorId": "silver-sponsor-1",
+      "amount": 1
+    },
+    {
+      "userPhone": "0834567890",
+      "sponsorId": "gold-sponsor-2",
+      "amount": 5
+    },
+    {
+      "userPhone": "0845678901",
+      "sponsorId": "silver-sponsor-1",
+      "amount": 2
+    },
+    {
+      "userPhone": "0856789012",
+      "sponsorId": "gold-sponsor-1",
+      "amount": 4
+    },
+    {
+      "userPhone": "0856789012",
+      "sponsorId": "gold-sponsor-1",
+      "amount": 6
+    }
+  ]
+}

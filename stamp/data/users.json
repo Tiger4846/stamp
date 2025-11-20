@@ -1,40 +1,156 @@
 {
+  "_description": "User accounts data - includes both regular users and admin users",
+  "_schema": {
+    "name": "string - Full name of the user",
+    "phone": "string - Unique phone number (used as primary identifier)",
+    "role": "'user' | 'admin' - User role in the system",
+    "qrCode": "string - Unique QR code identifier for the user",
+    "isClaimed": "boolean - Whether the user account has been claimed/activated"
+  },
   "users": [
     {
-      "id": 1,
-      "name": "JohnDoe",
-      "phone": "0987654321",
-      "role": "user"
+      "id": "admin-hpe",
+      "name": "HPE Admin",
+      "phone": "66-2-555-0001",
+      "role": "admin",
+      "qrCode": "QR_USER_001",
+      "isClaimed": false
     },
     {
-      "id": 2,
-      "name": "JaneSmith",
-      "phone": "0823456789",
-      "role": "user"
+      "id": "admin-zenith",
+      "name": "Zenith Admin",
+      "phone": "66-2-545-0001",
+      "role": "admin",
+      "qrCode": "QR_USER_002",
+      "isClaimed": false
     },
     {
-      "id": 3,
-      "name": "สมชาย ใจดี",
-      "phone": "0834567890",
-      "role": "user"
+      "id": "admin-lenovo",
+      "name": "Lenovo Admin",
+      "phone": "66-1-545-0002",
+      "role": "admin",
+      "qrCode": "QR_USER_003",
+      "isClaimed": false
     },
     {
-      "id": 4,
-      "name": "สมหญิง รักสนุก",
-      "phone": "0845678901",
-      "role": "user"
+      "id": "admin-nutanix",
+      "name": "Nutanix Admin",
+      "phone": "67-1-545-0002",
+      "role": "admin",
+      "qrCode": "QR_USER_004",
+      "isClaimed": false
     },
     {
-      "id": 5,
-      "name": "Michael Johnson",
-      "phone": "0856789012",
-      "role": "user"
+      "id": "admin-trend-micro",
+      "name": "Trend Micro Admin",
+      "phone": "69-1-545-0002",
+      "role": "admin",
+      "qrCode": "QR_USER_005",
+      "isClaimed": false
     },
     {
-      "id": 6,
-      "name": "Admin User",
-      "phone": "0800000000",
-      "role": "admin"
+      "id": "admin-aws",
+      "name": "AWS Admin",
+      "phone": "61-2-555-1002",
+      "role": "admin",
+      "qrCode": "QR_USER_019",
+      "isClaimed": false
+    },
+    {
+      "id": "admin-nforce",
+      "name": "nForce Admin",
+      "phone": "61-2-555-1001",
+      "role": "admin",
+      "qrCode": "QR_USER_006",
+      "isClaimed": false
+    },
+    {
+      "id": "admin-cyberark",
+      "name": "CyberArk Admin",
+      "phone": "61-2-555-1003",
+      "role": "admin",
+      "qrCode": "QR_USER_007",
+      "isClaimed": false
+    },
+    {
+      "id": "admin-fortinet",
+      "name": "Fortinet Admin",
+      "phone": "61-2-555-1004",
+      "role": "admin",
+      "qrCode": "QR_USER_009",
+      "isClaimed": false
+    },
+    {
+      "id": "admin-group_ib",
+      "name": "GROUP-IB Admin",
+      "phone": "61-2-555-1005",
+      "role": "admin",
+      "qrCode": "QR_USER_010",
+      "isClaimed": false
+    },
+    {
+      "id": "admin-one_identity",
+      "name": "One Identity Admin",
+      "phone": "61-2-555-1006",
+      "role": "admin",
+      "qrCode": "QR_USER_011",
+      "isClaimed": false
+    },
+    {
+      "id": "admin-paloalto",
+      "name": "Paloalto Networks Admin",
+      "phone": "61-2-555-1007",
+      "role": "admin",
+      "qrCode": "QR_USER_012",
+      "isClaimed": false
+    },
+    {
+      "id": "admin-pre",
+      "name": "PRE Admin",
+      "phone": "61-2-555-1008",
+      "role": "admin",
+      "qrCode": "QR_USER_013",
+      "isClaimed": false
+    },
+    {
+      "id": "admin-proofpoint",
+      "name": "Proofpoint Admin",
+      "phone": "61-2-555-1009",
+      "role": "admin",
+      "qrCode": "QR_USER_014",
+      "isClaimed": false
+    },
+    {
+      "id": "admin-radware",
+      "name": "Radware Admin",
+      "phone": "61-2-555-1010",
+      "role": "admin",
+      "qrCode": "QR_USER_015",
+      "isClaimed": false
+    },
+    {
+      "id": "admin-seciron",
+      "name": "SecIron Admin",
+      "phone": "61-2-555-1011",
+      "role": "admin",
+      "qrCode": "QR_USER_016",
+      "isClaimed": false
+    },
+    {
+      "id": "admin-truvisor",
+      "name": "Truvisor Admin",
+      "phone": "61-2-555-1012",
+      "role": "admin",
+      "qrCode": "QR_USER_017",
+      "isClaimed": false
+    },
+    {
+      "id": "admin-veeam",
+      "name": "Veeam Admin",
+      "phone": "61-2-555-1013",
+      "role": "admin",
+      "qrCode": "QR_USER_018",
+      "isClaimed": false
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "_description": "Template for adding new sponsors",
+  "_template": {
+    "id": "sponsor-type-number",
+    "name": "Company Name",
+    "phone": "XX-X-XXX-XXXX",
+    "level": "gold",
+    "adminPhone": "0800000000",
+    "logoUrl": "https://example.com/logo.png"
+  },
+  "sponsors": [
+    {
+      "id": "gold-sponsor-6",
+      "name": "Your Company",
+      "phone": "66-2-999-0001",
+      "level": "gold",
+      "adminPhone": "0800000000",
+      "logoUrl": null
+    }
+  ]
+}
