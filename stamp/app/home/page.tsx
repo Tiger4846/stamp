@@ -16,6 +16,7 @@ export default function Home() {
   const { user } = useUser();
   const { sponsors: apiSponsors, completedSponsors } = useSponsors();
   const [showQRModal, setShowQRModal] = useState(false);
+  const [showCompleteModal, setShowCompleteModal] = useState(false);
   const [sponsors, setSponsors] = useState<SponsorDisplay[]>([]);
   const [silverSponsors, setSilverSponsors] = useState<SponsorDisplay[]>([]);
 
@@ -105,7 +106,7 @@ export default function Home() {
         <div className="text-left mb-2 ">
           <p className="text-[20px] text-black font-bold mb-3">Gold Sponsor</p>
         </div>
-        <div className="mb-2 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 sm:gap-4 justify-items-center">
+        <div className="mb-2 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2 sm:gap-4 justify-items-center">
           {sponsors.map((sponsor) => (
             <div key={sponsor.id} className="relative shadow-md rounded-xl">
               <Image
@@ -138,7 +139,7 @@ export default function Home() {
             Silver Sponsor
           </p>
         </div>
-        <div className="mb-2 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 sm:gap-4 justify-items-center">
+        <div className="mb-2 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2 sm:gap-4 justify-items-center">
           {silverSponsors.map((sponsor) => (
             <div key={sponsor.id} className="relative shadow-md rounded-xl">
               <Image
@@ -165,6 +166,33 @@ export default function Home() {
               )}
             </div>
           ))}
+        </div>
+
+        {/* Complete Button */}
+        <div className="text-center mt-9">
+          <button
+            onClick={() => {
+              if (
+                sponsors.every((s) => s.completed) &&
+                silverSponsors.every((s) => s.completed)
+              ) {
+                setShowCompleteModal(true);
+              } else {
+                alert("Please complete all stamps before proceeding.");
+              }
+            }}
+            className={`font-semibold px-6 py-3 rounded-xl transition-colors shadow-lg ${
+              sponsors.every((s) => s.completed) &&
+              silverSponsors.every((s) => s.completed)
+                ? "bg-[#E38533] text-white hover:bg-[#aa6427]"
+                : "bg-gray-400 text-gray-200 cursor-not-allowed"
+            }`}
+            disabled={
+              !(sponsors.every((s) => s.completed) && silverSponsors.every((s) => s.completed))
+            }
+          >
+            Complete
+          </button>
         </div>
       </div>
 
@@ -217,6 +245,49 @@ export default function Home() {
                 className="w-[138px] h-11 bg-[#E38533] text-white py-3 rounded-full font-semibold hover:bg-[#aa6427] transition-colors"
               >
                 Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Complete Modal */}
+      {showCompleteModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white rounded-3xl p-6 max-w-md w-[90vw] shadow-2xl">
+            <div className="flex justify-center mb-6">
+              <Image
+                src="/logos/thankyoubot.svg"
+                alt="Congratulations"
+                width={120}
+                height={120}
+                priority
+                quality={100}
+                unoptimized
+              />
+            </div>
+            <h2 className="text-[24px] font-bold text-center text-[#E38533] mb-4">
+              Congratulations!
+            </h2>
+            <p className="text-[16px] text-center text-[#6A6868] mb-4">
+              You have successfully visited all booths
+            </p>
+            <hr className="my-4 border-t-2 border-dashed border-gray-300" />
+            <p className="text-[16px] text-center text-[#6A6868] mb-2">
+              Thank you for participating in our event!
+            </p>
+            <p className="text-[16px] text-center text-[#1A6FB1] font-bold">
+              Please present this screen to our staff to
+            </p>
+            <p className="text-[16px] text-center text-[#1A6FB1] font-bold">
+              receive your entry for the lucky draw.
+            </p>
+            <div className="text-center mt-6">
+              <button
+                onClick={() => setShowCompleteModal(false)}
+                className="bg-[#E38533] text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#aa6427] transition-colors shadow-lg"
+              >
+                Got it
               </button>
             </div>
           </div>

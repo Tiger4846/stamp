@@ -10,7 +10,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     ports:
-        - "3306:3306"
+        - "3309:3306"
     networks:
       - mysql_network
     command: --default-authentication-plugin=mysql_native_password
