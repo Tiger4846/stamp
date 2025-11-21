@@ -93,6 +93,28 @@ export default function SignIn() {
           </div>
         </div>
       </div>
+
+      {/* Error Popup */}
+      {error && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white rounded-3xl p-6 max-w-md w-[90vw] shadow-2xl">
+            <h2 className="text-[20px] font-bold text-center text-red-600 mb-4">
+              Error
+            </h2>
+            <p className="text-[16px] text-center text-gray-800 mb-4">
+              Phone number is invalid. Please try again.
+            </p>
+            <div className="text-center mt-6">
+              <button
+                onClick={() => setError("")}
+                className="bg-[#E38533] text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#aa6427] transition-colors shadow-lg"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useUser } from "@/hooks/useUser";
 import { useSponsors } from "@/hooks/useSponsors";
+import { useRouter } from "next/navigation";
 
 interface SponsorDisplay {
   id: string;
@@ -17,8 +18,11 @@ export default function Home() {
   const { sponsors: apiSponsors, completedSponsors } = useSponsors();
   const [showQRModal, setShowQRModal] = useState(false);
   const [showCompleteModal, setShowCompleteModal] = useState(false);
+  const [showAlreadyClaimedModal, setShowAlreadyClaimedModal] = useState(false);
   const [sponsors, setSponsors] = useState<SponsorDisplay[]>([]);
   const [silverSponsors, setSilverSponsors] = useState<SponsorDisplay[]>([]);
+  const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const loadData = () => {
@@ -55,6 +59,44 @@ export default function Home() {
 
   const closeQRModal = () => {
     setShowQRModal(false);
+  };
+
+  const handleComplete = async () => {
+    if (
+      sponsors.every((s) => s.completed) &&
+      silverSponsors.every((s) => s.completed)
+    ) {
+      setIsSubmitting(true);
+      try {
+        const token = localStorage.getItem("token"); // ดึง Token จาก localStorage (key set by useSignIn)
+        console.log("Claim: sending token present:", !!token);
+        const response = await fetch("/api/user/claim", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // เพิ่ม Token ใน Header
+          },
+        });
+
+        if (response.ok) {
+          setShowCompleteModal(true);
+        } else if (response.status === 409) {
+          // Already claimed
+          setShowAlreadyClaimedModal(true);
+        } else {
+          console.error('Claim response status:', response.status);
+          const data = await response.json().catch(() => ({ error: 'Unknown error' }));
+          alert(data.error || "Failed to complete. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error completing claim:", error);
+        alert("An unexpected error occurred. Please try again.");
+      } finally {
+        setIsSubmitting(false);
+      }
+    } else {
+      alert("Please complete all stamps before proceeding.");
+    }
   };
 
   return (
@@ -171,16 +213,7 @@ export default function Home() {
         {/* Complete Button */}
         <div className="text-center mt-9">
           <button
-            onClick={() => {
-              if (
-                sponsors.every((s) => s.completed) &&
-                silverSponsors.every((s) => s.completed)
-              ) {
-                setShowCompleteModal(true);
-              } else {
-                alert("Please complete all stamps before proceeding.");
-              }
-            }}
+            onClick={handleComplete}
             className={`font-semibold px-6 py-3 rounded-xl transition-colors shadow-lg ${
               sponsors.every((s) => s.completed) &&
               silverSponsors.every((s) => s.completed)
@@ -188,10 +221,13 @@ export default function Home() {
                 : "bg-gray-400 text-gray-200 cursor-not-allowed"
             }`}
             disabled={
-              !(sponsors.every((s) => s.completed) && silverSponsors.every((s) => s.completed))
+              !(
+                sponsors.every((s) => s.completed) &&
+                silverSponsors.every((s) => s.completed)
+              ) || isSubmitting
             }
           >
-            Complete
+            {isSubmitting ? "Submitting..." : "Complete"}
           </button>
         </div>
       </div>
@@ -288,6 +324,39 @@ export default function Home() {
                 className="bg-[#E38533] text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#aa6427] transition-colors shadow-lg"
               >
                 Got it
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Already Claimed Modal */}
+      {showAlreadyClaimedModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white rounded-3xl p-6 max-w-md w-[90vw] shadow-2xl">
+            <div className="flex justify-center mb-6">
+              <Image
+                src="/logos/ZenithSuccess.svg"
+                alt="Already Claimed"
+                width={80}
+                height={80}
+                priority
+                quality={100}
+                unoptimized
+              />
+            </div>
+            <h2 className="text-[22px] font-bold text-center text-[#E38533] mb-4">
+              ข้อความแจ้งเตือน
+            </h2>
+            <p className="text-[16px] text-center text-[#6A6868] mb-4">
+              คุณได้กดรับรางวัลไปแล้ว
+            </p>
+            <div className="text-center mt-6">
+              <button
+                onClick={() => setShowAlreadyClaimedModal(false)}
+                className="bg-[#E38533] text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#aa6427] transition-colors shadow-lg"
+              >
+                ปิด
               </button>
             </div>
           </div>
