@@ -11,7 +11,7 @@
     {
       "id": "admin-hpe",
       "name": "HPE Admin",
-      "phone": "66-2-555-0001",
+      "phone": "6625550001",
       "role": "admin",
       "qrCode": "QR_USER_001",
       "isClaimed": false
@@ -19,7 +19,7 @@
     {
       "id": "admin-zenith",
       "name": "Zenith Admin",
-      "phone": "66-2-545-0001",
+      "phone": "6625450001",
       "role": "admin",
       "qrCode": "QR_USER_002",
       "isClaimed": false
@@ -27,7 +27,7 @@
     {
       "id": "admin-lenovo",
       "name": "Lenovo Admin",
-      "phone": "66-1-545-0002",
+      "phone": "6615450002",
       "role": "admin",
       "qrCode": "QR_USER_003",
       "isClaimed": false
@@ -35,7 +35,7 @@
     {
       "id": "admin-nutanix",
       "name": "Nutanix Admin",
-      "phone": "67-1-545-0002",
+      "phone": "6715450002",
       "role": "admin",
       "qrCode": "QR_USER_004",
       "isClaimed": false
@@ -43,7 +43,7 @@
     {
       "id": "admin-trend-micro",
       "name": "Trend Micro Admin",
-      "phone": "69-1-545-0002",
+      "phone": "6915450002",
       "role": "admin",
       "qrCode": "QR_USER_005",
       "isClaimed": false
@@ -51,7 +51,7 @@
     {
       "id": "admin-aws",
       "name": "AWS Admin",
-      "phone": "61-2-555-1002",
+      "phone": "6125551002",
       "role": "admin",
       "qrCode": "QR_USER_019",
       "isClaimed": false
@@ -59,7 +59,7 @@
     {
       "id": "admin-nforce",
       "name": "nForce Admin",
-      "phone": "61-2-555-1001",
+      "phone": "6125551001",
       "role": "admin",
       "qrCode": "QR_USER_006",
       "isClaimed": false
@@ -67,7 +67,7 @@
     {
       "id": "admin-cyberark",
       "name": "CyberArk Admin",
-      "phone": "61-2-555-1003",
+      "phone": "6125551003",
       "role": "admin",
       "qrCode": "QR_USER_007",
       "isClaimed": false
@@ -75,7 +75,7 @@
     {
       "id": "admin-fortinet",
       "name": "Fortinet Admin",
-      "phone": "61-2-555-1004",
+      "phone": "6125551004",
       "role": "admin",
       "qrCode": "QR_USER_009",
       "isClaimed": false
@@ -83,7 +83,7 @@
     {
       "id": "admin-group_ib",
       "name": "GROUP-IB Admin",
-      "phone": "61-2-555-1005",
+      "phone": "6125551005",
       "role": "admin",
       "qrCode": "QR_USER_010",
       "isClaimed": false
@@ -91,7 +91,7 @@
     {
       "id": "admin-one_identity",
       "name": "One Identity Admin",
-      "phone": "61-2-555-1006",
+      "phone": "6125551006",
       "role": "admin",
       "qrCode": "QR_USER_011",
       "isClaimed": false
@@ -99,7 +99,7 @@
     {
       "id": "admin-paloalto",
       "name": "Paloalto Networks Admin",
-      "phone": "61-2-555-1007",
+      "phone": "6125551007",
       "role": "admin",
       "qrCode": "QR_USER_012",
       "isClaimed": false
@@ -107,7 +107,7 @@
     {
       "id": "admin-pre",
       "name": "PRE Admin",
-      "phone": "61-2-555-1008",
+      "phone": "6125551008",
       "role": "admin",
       "qrCode": "QR_USER_013",
       "isClaimed": false
@@ -115,7 +115,7 @@
     {
       "id": "admin-proofpoint",
       "name": "Proofpoint Admin",
-      "phone": "61-2-555-1009",
+      "phone": "6125551009",
       "role": "admin",
       "qrCode": "QR_USER_014",
       "isClaimed": false
@@ -123,7 +123,7 @@
     {
       "id": "admin-radware",
       "name": "Radware Admin",
-      "phone": "61-2-555-1010",
+      "phone": "6125551010",
       "role": "admin",
       "qrCode": "QR_USER_015",
       "isClaimed": false
@@ -131,7 +131,7 @@
     {
       "id": "admin-seciron",
       "name": "SecIron Admin",
-      "phone": "61-2-555-1011",
+      "phone": "6125551011",
       "role": "admin",
       "qrCode": "QR_USER_016",
       "isClaimed": false
@@ -139,7 +139,7 @@
     {
       "id": "admin-truvisor",
       "name": "Truvisor Admin",
-      "phone": "61-2-555-1012",
+      "phone": "6125551012",
       "role": "admin",
       "qrCode": "QR_USER_017",
       "isClaimed": false
@@ -147,7 +147,7 @@
     {
       "id": "admin-veeam",
       "name": "Veeam Admin",
-      "phone": "61-2-555-1013",
+      "phone": "6125551013",
       "role": "admin",
       "qrCode": "QR_USER_018",
       "isClaimed": false
