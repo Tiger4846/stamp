@@ -1,4 +1,32 @@
 -- CreateTable
+CREATE TABLE `users` (
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `organization` VARCHAR(255) NULL,
+    `fullname` VARCHAR(255) NULL,
+    `name_eng` VARCHAR(255) NULL,
+    `nickname` VARCHAR(255) NULL,
+    `job_title` VARCHAR(255) NULL,
+    `phone_number` VARCHAR(255) NULL,
+    `email` VARCHAR(255) NULL,
+    `status` VARCHAR(255) NULL,
+    `status_card` VARCHAR(255) NULL,
+    `industry` VARCHAR(255) NULL,
+    `team` VARCHAR(255) NULL,
+    `employee_id` VARCHAR(255) NULL,
+    `year` VARCHAR(255) NULL,
+    `number` VARCHAR(255) NULL DEFAULT '0',
+    `number_child` VARCHAR(255) NULL DEFAULT '0',
+    `number_child_over_six_year` VARCHAR(255) NULL DEFAULT '0',
+    `number_adult` VARCHAR(255) NULL DEFAULT '0',
+    `remark` TEXT NULL,
+    `signaturepath` TEXT NULL,
+    `created_at` DATETIME(3) NULL,
+    `updated_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `User` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
@@ -64,3 +92,4 @@ ALTER TABLE `StampTransaction` ADD CONSTRAINT `StampTransaction_userId_fkey` FOR
 
 -- AddForeignKey
 ALTER TABLE `StampTransaction` ADD CONSTRAINT `StampTransaction_sponsorId_fkey` FOREIGN KEY (`sponsorId`) REFERENCES `Sponsor`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+

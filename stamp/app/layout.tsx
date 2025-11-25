@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Zenith Stamp",
   description: "zenith stamp app",
+  icons: {
+    icon: "logo-30th.png",
+  },
   viewport: {
     width: "device-width",
     initialScale: 1,
