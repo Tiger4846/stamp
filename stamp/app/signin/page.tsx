@@ -59,7 +59,7 @@ export default function SignIn() {
                   Phone / Code
                 </label>
                 <input
-                  type="tel"
+                  type="text"
                   id="phone"
                   name="phone"
                   value={phone}

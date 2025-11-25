@@ -15,7 +15,7 @@ interface SponsorDisplay {
 
 export default function Home() {
   const { user } = useUser();
-  const { sponsors: apiSponsors, completedSponsors } = useSponsors();
+  const { sponsors: apiSponsors, completedSponsors, refetch } = useSponsors();
   const [showQRModal, setShowQRModal] = useState(false);
   const [showCompleteModal, setShowCompleteModal] = useState(false);
   const [showAlreadyClaimedModal, setShowAlreadyClaimedModal] = useState(false);
@@ -59,6 +59,7 @@ export default function Home() {
 
   const closeQRModal = () => {
     setShowQRModal(false);
+    refetch();
   };
 
   const handleComplete = async () => {

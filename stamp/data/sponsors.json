@@ -11,7 +11,7 @@
     {
       "id": "gold-sponsor-1",
       "name": "HPE aruba networking",
-      "phone": "66-2-555-0001",
+      "phone": "6625550001",
       "level": "gold",
       "adminId": "admin-hpe",
       "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/gold-sponsor/hpe.png"
@@ -19,7 +19,7 @@
     {
       "id": "gold-sponsor-2",
       "name": "Zenith Comp",
-      "phone": "66-2-545-0001",
+      "phone": "6625450001",
       "level": "gold",
       "adminId": "admin-zenith",
       "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/gold-sponsor/zenith-comp.png"
@@ -27,7 +27,7 @@
     {
       "id": "gold-sponsor-3",
       "name": "Lenovo",
-      "phone": "66-1-545-0002",
+      "phone": "6615450002",
       "level": "gold",
       "adminId": "admin-lenovo",
       "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/gold-sponsor/lenovo.png"
@@ -35,7 +35,7 @@
     {
       "id": "gold-sponsor-4",
       "name": "Nutanix",
-      "phone": "67-1-545-0002",
+      "phone": "6715450002",
       "level": "gold",
       "adminId": "admin-nutanix",
       "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/gold-sponsor/nutanix.png"
@@ -43,7 +43,7 @@
     {
       "id": "gold-sponsor-5",
       "name": "TREND micro",
-      "phone": "69-1-545-0002",
+      "phone": "6915450002",
       "level": "gold",
       "adminId": "admin-trend-micro",
       "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/gold-sponsor/trend-micro.png"
@@ -51,7 +51,7 @@
     {
       "id": "gold-sponsor-6",
       "name": "AWS",
-      "phone": "61-2-555-1002",
+      "phone": "6125551002",
       "level": "gold",
       "adminId": "admin-aws",
       "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/RE13VQ9.png"
@@ -59,7 +59,7 @@
     {
       "id": "silver-sponsor-1",
       "name": "nForce",
-      "phone": "61-2-555-1001",
+      "phone": "6125551001",
       "level": "silver",
       "adminId": "admin-nforce",
       "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/nForce.png"
@@ -67,7 +67,7 @@
     {
       "id": "silver-sponsor-2",
       "name": "CyberArk",
-      "phone": "61-2-555-1003",
+      "phone": "6125551003",
       "level": "silver",
       "adminId": "admin-cyberark",
       "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/cyberark.png"
@@ -75,7 +75,7 @@
     {
       "id": "silver-sponsor-4",
       "name": "fortinet",
-      "phone": "61-2-555-1004",
+      "phone": "6125551004",
       "level": "silver",
       "adminId": "admin-fortinet",
       "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/fortinet.png"
@@ -83,7 +83,7 @@
     {
       "id": "silver-sponsor-5",
       "name": "GROUP-IB",
-      "phone": "61-2-555-1005",
+      "phone": "6125551005",
       "level": "silver",
       "adminId": "admin-group_ib",
       "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/group-ib.png"
@@ -91,7 +91,7 @@
     {
       "id": "silver-sponsor-6",
       "name": "One Identity",
-      "phone": "61-2-555-1006",
+      "phone": "6125551006",
       "level": "silver",
       "adminId": "admin-one_identity",
       "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/one-identity.png"
@@ -99,7 +99,7 @@
     {
       "id": "silver-sponsor-7",
       "name": "Paloalto Networks",
-      "phone": "61-2-555-1007",
+      "phone": "6125551007",
       "level": "silver",
       "adminId": "admin-paloalto",
       "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/paloalto.png"
@@ -107,7 +107,7 @@
     {
       "id": "silver-sponsor-8",
       "name": "PRE",
-      "phone": "61-2-555-1008",
+      "phone": "6125551008",
       "level": "silver",
       "adminId": "admin-pre",
       "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/pre.png"
@@ -115,7 +115,7 @@
     {
       "id": "silver-sponsor-9",
       "name": "Proofpoint",
-      "phone": "61-2-555-1009",
+      "phone": "6125551009",
       "level": "silver",
       "adminId": "admin-proofpoint",
       "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/proofpoint.png"
@@ -123,7 +123,7 @@
     {
       "id": "silver-sponsor-10",
       "name": "Radware",
-      "phone": "61-2-555-1010",
+      "phone": "6125551010",
       "level": "silver",
       "adminId": "admin-radware",
       "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/radware.png"
@@ -131,7 +131,7 @@
     {
       "id": "silver-sponsor-11",
       "name": "SecIron",
-      "phone": "61-2-555-1011",
+      "phone": "6125551011",
       "level": "silver",
       "adminId": "admin-seciron",
       "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/seciron.png"
@@ -139,7 +139,7 @@
     {
       "id": "silver-sponsor-12",
       "name": "Truvisor",
-      "phone": "61-2-555-1012",
+      "phone": "6125551012",
       "level": "silver",
       "adminId": "admin-truvisor",
       "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/truvisor.png"
@@ -147,7 +147,7 @@
     {
       "id": "silver-sponsor-13",
       "name": "veeam",
-      "phone": "61-2-555-1013",
+      "phone": "6125551013",
       "level": "silver",
       "adminId": "admin-veeam",
       "logoUrl": "https://pub-cd7d61ba8bcc4070b2ac58936fc25db5.r2.dev/logo/silver-sponsor/veeam.png"
