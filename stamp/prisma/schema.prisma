@@ -41,7 +41,6 @@ model ExternalUser {
   updated_at                 DateTime?
 
   @@map("users")
-  @@ignore
 }
 
 model User {
