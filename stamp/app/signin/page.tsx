@@ -20,23 +20,35 @@ export default function SignIn() {
   };
 
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-end overflow-hidden">
-      {/* Background Wave */}
-      <div className="absolute inset-0 z-0">
+    <div className="relative flex min-h-screen flex-col items-center justify-center sm:justify-end overflow-hidden">
+      {/* Background Wave - Desktop */}
+      <div className="absolute inset-0 z-0 hidden sm:block">
         <Image
           src="/backgrounds/BGwave.png"
           alt="Background Wave"
           fill
-          className="object-cover object-top"
+          className="object-cover object-top w-full"
           priority
           quality={100}
           unoptimized
         />
       </div>
-      <div className="relative z-10 justify-center pb-10 sm:pb-20 md:pb-25 px-4">
+      {/* Background Wave - Mobile */}
+      <div className="absolute inset-0 z-0 block sm:hidden">
+        <Image
+          src="/backgrounds/bg-mobile.jpg"
+          alt="Background Wave Mobile"
+          fill
+          className="object-cover object-center w-full"
+          priority
+          quality={100}
+          unoptimized
+        />
+      </div>
+      <div className="relative z-10 justify-center pb-10 sm:pb-20 md:pb-25 px-4 mt-70 sm:mt-0">
         <div className="w-full max-w-md px-4 sm:px-6">
           {/* Form Card */}
-          <div className="p-6 sm:p-8 md:p-10">
+          <div className="p-6 sm:p-8 md:p-10 bg-white/80 sm:bg-transparent rounded-3xl sm:rounded-none backdrop-blur-sm sm:backdrop-blur-none opacity-80">
             <h1 className="text-[28px] sm:text-[36px] font-bold text-center mb-2 text-black">
               Sign in
             </h1>
@@ -99,7 +111,7 @@ export default function SignIn() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <div className="bg-white rounded-3xl p-6 max-w-md w-[90vw] shadow-2xl">
             <h2 className="text-[20px] font-bold text-center text-red-600 mb-4">
-              Error
+              เกิดข้อผิดพลาด
             </h2>
             <p className="text-[16px] text-center text-gray-800 mb-4">
               ไม่พบหมายเลขโทรศัพท์ในระบบ
