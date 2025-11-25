@@ -125,7 +125,7 @@ export default function Home() {
       <div className="relative z-10 w-[790px] max-w-[95vw] h-[880px] max-h-[90vh] overflow-y-auto rounded-3xl bg-white p-4 sm:p-6">
         <div className="relative z-10 flex justify-center">
           <Image
-            src="/images/Thepower.svg"
+            src="/images/thepower.svg"
             alt="Zenith Logo"
             width={742}
             height={254}

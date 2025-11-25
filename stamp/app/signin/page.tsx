@@ -104,9 +104,6 @@ export default function SignIn() {
             <p className="text-[16px] text-center text-gray-800 mb-4">
               ไม่พบหมายเลขโทรศัพท์ในระบบ
             </p>
-            <p className="text-[14px] text-center text-gray-600 mb-6">
-              กรุณาลงทะเบียนก่อนเข้าใช้งาน
-            </p>
             <div className="flex gap-3 justify-center mt-6">
               <button
                 onClick={() => setError("")}
@@ -114,12 +111,12 @@ export default function SignIn() {
               >
                 Close
               </button>
-              <button
+              {/* <button
                 onClick={() => window.location.href = '/signup'}
                 className="bg-[#E38533] text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#aa6427] transition-colors shadow-lg"
               >
                 Sign Up
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
