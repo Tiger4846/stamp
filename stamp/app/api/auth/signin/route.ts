@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server';
 import prisma from '@/lib/prisma';
 import { signToken } from '@/lib/jwt';
+import { generateAndUploadQRCode } from '@/lib/qrcode';
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,16 +16,37 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Find user by phone
-    const user = await prisma.user.findUnique({
+    // Check if user already exists in User table
+    let user = await prisma.user.findUnique({
       where: { phone },
     });
 
+    // If user doesn't exist, check external users table and create new user
     if (!user) {
-      return Response.json(
-        { error: 'User not found' },
-        { status: 404 }
-      );
+      // Check if user exists in external users table
+      const externalUser = await prisma.externalUser.findFirst({
+        where: { phone_number: phone },
+      });
+
+      if (!externalUser) {
+        return Response.json(
+          { error: 'Phone number not found in the system' },
+          { status: 404 }
+        );
+      }
+
+      // Generate and upload QR code
+      const qrCodeUrl = await generateAndUploadQRCode(phone);
+
+      // Create user with data from external user
+      user = await prisma.user.create({
+        data: {
+          name: externalUser.fullname || externalUser.nickname || 'User',
+          phone: phone,
+          role: 'user',
+          qrCode: qrCodeUrl,
+        },
+      });
     }
 
     // Generate JWT token

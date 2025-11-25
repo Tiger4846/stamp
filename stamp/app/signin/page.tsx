@@ -56,7 +56,7 @@ export default function SignIn() {
                   htmlFor="phone"
                   className="block text-[16px] sm:text-[18px] font-semibold text-black mb-2 self-start"
                 >
-                  Phone
+                  Phone / Code
                 </label>
                 <input
                   type="tel"
@@ -65,7 +65,7 @@ export default function SignIn() {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   className="w-full max-w-[300px] sm:max-w-[460px] h-11 px-4 rounded-full shadow-sm text-black border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
-                  placeholder="Enter your phone"
+                  placeholder="Enter your phone / Code"
                   required
                 />
               </div>
@@ -81,7 +81,7 @@ export default function SignIn() {
             </form>
 
             {/* Sign In Link */}
-            <p className="text-center text-sm sm:text-base text-gray-600 mt-6">
+            {/* <p className="text-center text-sm sm:text-base text-gray-600 mt-6">
               Don&apos;t have an account?{" "}
               <a
                 href="/signup"
@@ -89,7 +89,7 @@ export default function SignIn() {
               >
                 Sign Up
               </a>
-            </p>
+            </p> */}
           </div>
         </div>
       </div>
@@ -102,14 +102,23 @@ export default function SignIn() {
               Error
             </h2>
             <p className="text-[16px] text-center text-gray-800 mb-4">
-              Phone number is invalid. Please try again.
+              ไม่พบหมายเลขโทรศัพท์ในระบบ
             </p>
-            <div className="text-center mt-6">
+            <p className="text-[14px] text-center text-gray-600 mb-6">
+              กรุณาลงทะเบียนก่อนเข้าใช้งาน
+            </p>
+            <div className="flex gap-3 justify-center mt-6">
               <button
                 onClick={() => setError("")}
-                className="bg-[#E38533] text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#aa6427] transition-colors shadow-lg"
+                className="bg-gray-200 text-gray-800 font-semibold px-6 py-3 rounded-xl hover:bg-gray-300 transition-colors shadow-lg"
               >
                 Close
+              </button>
+              <button
+                onClick={() => window.location.href = '/signup'}
+                className="bg-[#E38533] text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#aa6427] transition-colors shadow-lg"
+              >
+                Sign Up
               </button>
             </div>
           </div>

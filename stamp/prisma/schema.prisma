@@ -14,6 +14,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// External users table (managed by another system)
+// This model is only for reading data, not for Prisma to manage the table structure
+model ExternalUser {
+  id                         BigInt    @id @default(autoincrement()) @db.UnsignedBigInt
+  organization               String?   @db.VarChar(255)
+  fullname                   String?   @db.VarChar(255)
+  name_eng                   String?   @db.VarChar(255)
+  nickname                   String?   @db.VarChar(255)
+  job_title                  String?   @db.VarChar(255)
+  phone_number               String?   @db.VarChar(255)
+  email                      String?   @db.VarChar(255)
+  status                     String?   @db.VarChar(255)
+  status_card                String?   @db.VarChar(255)
+  industry                   String?   @db.VarChar(255)
+  team                       String?   @db.VarChar(255)
+  employee_id                String?   @db.VarChar(255)
+  year                       String?   @db.VarChar(255)
+  number                     String?   @default("0") @db.VarChar(255)
+  number_child               String?   @default("0") @db.VarChar(255)
+  number_child_over_six_year String?   @default("0") @db.VarChar(255)
+  number_adult               String?   @default("0") @db.VarChar(255)
+  remark                     String?   @db.Text
+  signaturepath              String?   @db.Text
+  created_at                 DateTime?
+  updated_at                 DateTime?
+
+  @@map("users")
+  @@ignore
+}
+
 model User {
   id          String         @id @default(uuid())
   name        String
@@ -28,6 +58,8 @@ model User {
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@map("User")
 }
 
 enum UserRole {

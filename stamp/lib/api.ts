@@ -4,7 +4,24 @@ export interface SignInRequest {
   phone: string;
 }
 
+export interface SignUpRequest {
+  name: string;
+  phone: string;
+  role?: string;
+}
+
 export interface SignInResponse {
+  user: {
+    id: string;
+    name: string;
+    phone: string;
+    role: string;
+    qrCode: string;
+  };
+  token: string;
+}
+
+export interface SignUpResponse {
   user: {
     id: string;
     name: string;
@@ -55,6 +72,23 @@ export const authApi = {
     if (!response.ok) {
       const error: ApiError = await response.json();
       throw new Error(error.error || 'Sign in failed');
+    }
+
+    return response.json();
+  },
+
+  signUp: async (data: SignUpRequest): Promise<SignUpResponse> => {
+    const response = await fetch(`${API_BASE_URL}/api/auth/signup`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const error: ApiError = await response.json();
+      throw new Error(error.error || 'Sign up failed');
     }
 
     return response.json();
