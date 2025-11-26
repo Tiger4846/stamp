@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm run db:generate && npm run db:migrate && next dev",
+    "dev": "npm run db:generate && npm run db:migrate && NODE_OPTIONS='--max-old-space-size=16384' next dev",
     "dev:setup": "npm run db:up && npm run db:migrate && npm run db:generate",
-    "build": "next build",
-    "start": "next start",
+    "build": "NODE_OPTIONS='--max-old-space-size=16384' next build",
+    "start": "NODE_OPTIONS='--max-old-space-size=16384' next start",
     "lint": "eslint",
     "db:up": "docker-compose -f docker-compose.db.yaml up -d",
     "db:down": "docker-compose -f docker-compose.db.yaml down",
